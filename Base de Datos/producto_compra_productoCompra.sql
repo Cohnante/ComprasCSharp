@@ -133,3 +133,15 @@ go
 
 USP_update_categoria '123456', 'arroz', 'blanco';
 
+go 
+CREATE PROCEDURE USP_delete_categoria
+  @id
+AS
+begin
+	 DELETE * from Categoria where id_categoria = @id;
+end
+go
+
+USP_delete_categoria '123456';
+
+

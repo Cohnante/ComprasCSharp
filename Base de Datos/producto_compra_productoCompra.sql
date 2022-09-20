@@ -145,3 +145,67 @@ go
 USP_delete_categoria '123456';
 
 
+go
+CREATE PROCEDURE USP_insert_producto
+		@codigo_producto varchar (30),
+		@nombre_producto varchar (30),
+		@valor float,
+		@fk_categoria varchar(30)
+AS
+begin
+	INSERT into producto (codigo_producto, nombre_producto, valor, fk_categoria) VALUES (@codigo_producto, @nombre_producto, @valor, @fk_categoria);
+end
+go 
+
+USP_insert_producto '123', 'arroz blanco', 3000.500, '123456';
+
+go
+CREATE PROCEDURE USP_select_producto_uno
+		@codigo_producto varchar (30)
+as
+begin
+	select * from producto where codigo_producto=@codigo_producto;
+end
+go
+
+USP_select_producto_uno '123';
+
+go 
+CREATE PROCEDURE USP_select_productos_all
+		@codigo_producto varchar (30),
+		
+AS
+begin
+	select * from producto;
+end
+go   
+
+USP_select_productos_all
+
+go
+CREATE PROCEDURE USP_update_producto
+@codigo_producto varchar (30),
+		@nombre_producto varchar (30),
+		@valor float,
+		@fk_categoria varchar(30)
+as
+begin
+		update producto set nombre_producto=@nombre_producto, valor=@valor, fk_categoria=@fk_categoria where codigo_producto=@codigo_producto;
+end
+go
+
+USP_update_producto '123', 'carne roja', 9500.300, '123456';
+
+go
+CREATE PROCEDURE USP_delete_producto
+		@codigo_producto varchar (30),
+		@nombre_producto varchar (30),
+		@valor float,
+		@fk_categoria varchar(30)
+AS
+begin
+		delete * from producto where codigo_producto=@codigo_producto;
+end
+go
+
+USP_delete_producto '123';

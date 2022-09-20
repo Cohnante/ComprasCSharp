@@ -209,3 +209,78 @@ end
 go
 
 USP_delete_producto '123';
+
+go
+CREATE PROCEDURE USP_insert_compraProducto
+		@num_compra varchar (30) not null,
+		@codigo_pr varchar (30) not null,
+		@cantidad int null,
+		@costo float null,
+		@valor_total float null
+AS
+begin 
+	insert into Compra_Producto (num_compra, codigo_pr, cantidad, costo, valor_total) values (@num_compra, @codigo_pr, @cantidad, @costo, @valor_total);
+end
+go
+
+USP_insert_compraProducto '12345', '123', 50, 9000.300, 457000.300;
+
+go
+CREATE PROCEDURE USP_select_compraProducto_uno
+		@num_compra varchar (30) not null,
+		@codigo_pr varchar (30) not null,
+		@cantidad int null,
+		@costo float null,
+		@valor_total float null
+AS
+begin
+		select * from Compra_Producto where num_compra=@num_compra and codigo_pr=@codigo_pr;
+end
+go 
+
+USP_select_compraProducto_uno '12345', '123';
+
+go
+CREATE PROCEDURE USP_select_compraProducto_all
+		@num_compra varchar (30) not null,
+		@codigo_pr varchar (30) not null,
+		@cantidad int null,
+		@costo float null,
+		@valor_total float null
+AS
+begin 
+		select * from Compra_Producto;
+end
+go 
+
+USP_select_compraProducto_all;
+
+go
+CREATE PROCEDURE USP_update_compraProducto
+		@num_compra varchar (30) not null,
+		@codigo_pr varchar (30) not null,
+		@cantidad int null,
+		@costo float null,
+		@valor_total float null
+AS
+begin
+		update Compra_Producto set cantidad=@cantidad, costo=@costo, valor_total=@valor_total where num_compra=@num_compra and codigo_pr=@codigo_pr;
+end
+go
+
+USP_update_compraProducto '12345', '123456', 30, 7500.00, 225000.00;
+
+go
+CREATE PROCEDURE USP_delete_compraProducto
+		@num_compra varchar (30) not null,
+		@codigo_pr varchar (30) not null,
+		@cantidad int null,
+		@costo float null,
+		@valor_total float null
+as
+begin
+		delete * from Compra_Producto where num_compra=@num_compra and codigo_pr=@codigo_pr;
+end
+go
+
+USP_delete_compraProducto '12345', '123456';

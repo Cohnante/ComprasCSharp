@@ -158,11 +158,21 @@ begin
 end
 go
 
+go
+create procedure USP_ComboBox_Empleado
+as
+begin
+        SELECT '0' as id, 'Seleccione el nombre del Empleado ' as Nombre
+        union
+        SELECT id_empleado, Nombre_empleado FROM empleado
+end
+go
 
 /*Faltante ComboBox(NO SE COMO SE HACE ESA MONDA)*/
 
 select * from Empleado
 
+execute USP_ComboBox_Empleado
 execute USP_Consultar_Empleado '1'
 execute USP_Borrar_Empleado '1'
 execute USP_Actualizar_Empleado '1','dx','da','123456789','das'

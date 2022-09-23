@@ -3,6 +3,16 @@ use distribuidora
 /* CRUD + Listar de Cliente */
 
 go
+create procedure USP_COMBO_CLIENTE
+as
+begin
+	SELECT '0' as id, 'Seleccione un Cliente' as cliente
+	union
+	SELECT id_cliente as id, nombre_cliente as cliente from Cliente
+end
+go
+
+go
 create procedure USP_CREATE_CLIENTE
 	@id_cliente varchar (10),
 	@nombre_cliente varchar (30),
@@ -75,11 +85,21 @@ execute USP_LIST_CLIENTE /* Work */
 /* CRUD + Listar de Proveedor */
 
 go
+create procedure USP_COMBO_PROVEEDOR
+as
+begin
+	SELECT '0' as id, 'Seleccione un proveedor' as proveedor
+	union
+	SELECT id_proveedor as id, nombre_provedor as proveedor from Proveedor
+end
+go
+
+go
 create procedure USP_CREATE_PROVEEDOR
 	@id_proveedor varchar (10),
 	@nombre_proveedor varchar (30),
 	@telefono_proveedor varchar (30),
-	@direccion_proveedor varchar (40)
+	@direccion_proveedor varchar (150)
 as
 begin
 	INSERT INTO Proveedor(id_proveedor, nombre_provedor, telefono, dirreccion_proveedor) values (@id_proveedor, @nombre_proveedor, @telefono_proveedor,  @direccion_proveedor);
@@ -104,7 +124,7 @@ create procedure USP_UPDATE_PROVEEDOR
 	@id_proveedor varchar (10),
 	@nombre_proveedor varchar (30),
 	@telefono_proveedor varchar (30),
-	@direccion_proveedor varchar (40)
+	@direccion_proveedor varchar (150)
 as
 begin
 	UPDATE Proveedor set id_proveedor = @id_proveedor, nombre_provedor = @nombre_proveedor, telefono = @telefono_proveedor, dirreccion_proveedor = @direccion_proveedor;
@@ -145,7 +165,7 @@ create procedure USP_CREATE_COMPRAS
 	@id_proveedor varchar (10),
 	@nombre_proveedor varchar (30),
 	@telefono_proveedor varchar (30),
-	@direccion_proveedor varchar (40)
+	@direccion_proveedor varchar (150)
 as
 begin
 	INSERT INTO Proveedor(id_proveedor, nombre_provedor, telefono, dirreccion_proveedor) values (@id_proveedor, @nombre_proveedor, @telefono_proveedor,  @direccion_proveedor);
@@ -170,7 +190,7 @@ create procedure USP_UPDATE_COMPRAS
 	@id_proveedor varchar (10),
 	@nombre_proveedor varchar (30),
 	@telefono_proveedor varchar (30),
-	@direccion_proveedor varchar (40)
+	@direccion_proveedor varchar (150)
 as
 begin
 	UPDATE Proveedor set id_proveedor = @id_proveedor, nombre_provedor = @nombre_proveedor, telefono = @telefono_proveedor, dirreccion_proveedor = @direccion_proveedor;

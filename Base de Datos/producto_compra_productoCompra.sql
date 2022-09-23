@@ -1,105 +1,18 @@
--- Se elimina la base de datos distribuidora si existe --
-drop database if exists distribuidora;
-go
--- se crea la base de datos --
-create database distribuidora;
-go
--- se usa la base de datos --
-use distribuidora;
-go
+use distribuidora
 
-create table Empleado (id_empleado varchar (10) primary key not null,
-						nombre_empleado varchar (30) not null,
-						apellido_empleado varchar (30) not null,
-						telefono_empleado varchar (30) not null,
-						edad_empleado varchar (14) not null,
-						direccion_empleado varchar (150) not null,
-						nacionalidad_empleado varchar (40) not null
-
-						);
 go
-create table Proveedor (id_proveedor varchar (30) primary key not null,
-						nombre_provedor varchar (30) not null,
-						telefono varchar (30) not null,
-						dirreccion_proveedor varchar (150) not null
-						);
+create procedure USP_combo_categoria
+as
+begin
+	SELECT '0' as id, 'Seleccione una categoria' as categoria
+	union
+	SELECT id_categoria as id, nombre as categoria from Categoria
+end
 go
-create table Categoria (id_categoria varchar (30) primary key not null,
-						nombre varchar (30) not null,
-						caracteristica varchar (30) not null
-						);
-go
-create table cliente (id_cliente varchar (10) primary key not null,
-					  nombre_cliente varchar (30) not null,
-					  apellido_cliente varchar (30) not null,
-					  telefono_cliente varchar (30) not null,
-					  edad_cliente varchar (14) not null,
-					  direccion_cliente varchar (150) not null,
-					  nacionalidad_cliente varchar (40) not null
-					  );
-go
-create table ventas (numero_venta int identity primary key not null,
-					fecha date not null,
-					fk_empleado varchar (10) not null,
-					fk_cliente varchar (10) not null,
-					iva float null,
-					sub_total float null,
-					total float null,
-					foreign key (fk_cliente) references cliente(id_cliente),
-					foreign key (fk_empleado) references empleado(id_empleado)
-					);
-go
-create table Compra (id_compra varchar (30) primary key not null,
-					fk_empleado varchar (10) not null,
-					iva float null,
-					fk_proveedor varchar (30) not null,
-					total float null,
-					sub_total float null,
-					fecha date,
-					foreign key (fk_empleado) references Empleado(id_empleado),
-					foreign key (fk_proveedor) references proveedor(id_proveedor)
-					);
-go
-
-create table producto (codigo_producto varchar (30) primary key not null,
-						nombre_producto varchar (30) not null,
-						valor float null,
-						fk_categoria varchar (30) not null,
-						foreign key (fk_categoria) references Categoria(id_categoria)
-						);
-go
-
-
-
-create table Compra_Producto ( 
-							   num_compra varchar (30) not null,
-							   codigo_pr varchar (30) not null,
-							   cantidad int null,
-							   costo float null,
-							   valor_total float null,
-							   constraint fk1 foreign key (num_compra) references Compra (id_compra),
-							   constraint fk2 foreign key (codigo_pr) references producto (codigo_producto),
-							   primary key (num_compra,codigo_pr)
-							  );
-go
-create table ventas_producto (codigo_pr varchar (30) not null,
-							  num_venta int not null,
-							  cantidad int not null,
-							  valor_total float not null,
-							  constraint fk3 foreign key (num_venta) references ventas (numero_venta),
-							  constraint fk4 foreign key (codigo_pr) references producto (codigo_producto),
-							  primary key (num_venta,codigo_pr)
-							  );
-go
-
---create database oli
-use oli
-drop database oli;
-
 
 go 
 create procedure USP_insert_categoria
-	@id varchar(30),
+	@id varchar(10),
 	@nombre varchar(30),
 	@caracteristica varchar(30)
 as
@@ -108,22 +21,22 @@ begin
 end
 go 
 
-USP_insert_categoria '123456', 'comida', 'roja';
+--USP_insert_categoria '123456', 'comida', 'roja';
 
 go 
 create procedure USP_select_categoria_uno
-	@id varchar(30)
+	@id varchar(10)
 as
 begin
 	select * from Categoria where id_categoria=@id;
 end
 go
 
-USP_select_categoria_uno '123456';
+--USP_select_categoria_uno '123456';
 
 go
 create procedure USP_update_categoria
-	@id varchar(30),
+	@id varchar(10),
 	@nombre varchar(30),
 	@caracteristica varchar(30)
 as
@@ -132,75 +45,94 @@ begin
 end
 go
 
-USP_update_categoria '123456', 'arroz', 'blanco';
+--USP_update_categoria '123456', 'arroz', 'blanco';
 
 go 
 CREATE PROCEDURE USP_delete_categoria
-  @id varchar(30)
+  @id varchar(10)
 as
 begin
 	 DELETE from Categoria where id_categoria = @id;
 end
 go
 
-USP_delete_categoria '123456';
+--USP_delete_categoria '123456';
 
+go 
+CREATE PROCEDURE USP_select_categoria_all
+as
+begin
+	SELECT * from Categoria
+end
+go
+
+--USP_select_categoria_all
+
+go
+create procedure USP_combo_producto
+as
+begin
+	SELECT '0' as id, 'Seleccione un producto'  as producto
+	union
+	SELECT codigo_producto as id, nombre_producto as producto from Producto
+end
+go
 
 go
 CREATE PROCEDURE USP_insert_producto
-		@codigo_producto varchar (30),
+		@codigo_producto varchar (10),
 		@nombre_producto varchar (30),
 		@valor float,
-		@fk_categoria varchar(30)
+		@fk_categoria varchar(10)
 AS
 begin
-	INSERT into producto (codigo_producto, nombre_producto, valor, fk_categoria) VALUES (@codigo_producto, @nombre_producto, @valor, @fk_categoria);
+	INSERT into Producto (codigo_producto, nombre_producto, valor, fk_categoria) VALUES (@codigo_producto, @nombre_producto, @valor, @fk_categoria);
 end
 go 
 
-USP_insert_producto '123', 'arroz blanco', 3000.500, '123456';
+--USP_insert_producto '123', 'arroz blanco', 3000.500, '123456';
 
 go
 CREATE PROCEDURE USP_select_producto_uno
-		@codigo_producto varchar (30)
+		@codigo_producto varchar (10)
 as
 begin
-	select * from producto where codigo_producto=@codigo_producto;
+	select * from Producto where codigo_producto=@codigo_producto;
 end
 go
 
-USP_select_producto_uno '123';
+--USP_select_producto_uno '123';
 
 go 
 CREATE PROCEDURE USP_select_productos_all
 as
 begin
-	select * from producto;
+	select * from Producto;
 end
 go 
 
-USP_select_productos_all;
+--USP_select_productos_all;
 
 go
 CREATE PROCEDURE USP_update_producto
-@codigo_producto varchar (30),
+@codigo_producto varchar (10),
 		@nombre_producto varchar (30),
 		@valor float,
-		@fk_categoria varchar(30)
+		@fk_categoria varchar(10)
 as
 begin
-		update producto set nombre_producto=@nombre_producto, valor=@valor, fk_categoria=@fk_categoria where codigo_producto=@codigo_producto;
+		update Producto set nombre_producto=@nombre_producto, valor=@valor, fk_categoria=@fk_categoria where codigo_producto=@codigo_producto;
 end
 go
 
-USP_update_producto '123', 'carne roja', 9500.300, '123456';
+--USP_update_producto '123', 'carne roja', 9500.300, '123456';
 
 go
 CREATE PROCEDURE USP_delete_producto
-		@codigo_producto varchar (30)
+		@codigo_producto varchar (10)
 as
 begin
-		delete from producto where codigo_producto=@codigo_producto;
+		delete from Producto where codigo_producto=@codigo_producto;
 end
 go
 
@@ -208,75 +140,64 @@ USP_delete_producto '123';
 
 go
 CREATE PROCEDURE USP_insert_compraProducto
-		@num_compra varchar (30),
-		@codigo_pr varchar (30),
+		@num_compra varchar (10),
+		@codigo_pr varchar (10),
 		@cantidad int,
 		@costo float,
 		@valor_total float
 AS
 begin 
-	insert into Compra_Producto (num_compra, codigo_pr, cantidad, costo, valor_total) values (@num_compra, @codigo_pr, @cantidad, @costo, @valor_total);
+	insert into Compra_Producto (fk_num_compra, fk_codigo_pr, cantidad, costo, valor_total) values (@num_compra, @codigo_pr, @cantidad, @costo, @valor_total);
 end
 go
 
-USP_insert_compraProducto '12345', '123', 50, 9000.300, 457000.300;
+--USP_insert_compraProducto '12345', '123', 50, 9000.300, 457000.300;
 
 go
 CREATE PROCEDURE USP_select_compraProducto_uno
-		@num_compra varchar (30),
-		@codigo_pr varchar (30),
-		@cantidad int,
-		@costo float,
-		@valor_total float
+		@fk_num_compra varchar (10),
+		@codigo_pr varchar (10)
 AS
 begin
-		select * from Compra_Producto where num_compra=@num_compra and codigo_pr=@codigo_pr;
+		select * from Compra_Producto where fk_num_compra=@fk_num_compra and fk_codigo_pr=@codigo_pr;
 end
 go 
 
-USP_select_compraProducto_uno '12345', '123';
+--USP_select_compraProducto_uno '12345', '123';
 
 go
 CREATE PROCEDURE USP_select_compraProducto_all
-		@num_compra varchar (30),
-		@codigo_pr varchar (30),
-		@cantidad int,
-		@costo float,
-		@valor_total float
 AS
 begin 
 		select * from Compra_Producto;
 end
 go 
 
-USP_select_compraProducto_all;
+--USP_select_compraProducto_all;
 
 go
 CREATE PROCEDURE USP_update_compraProducto
-		@num_compra varchar (30),
+		@fk_num_compra varchar (10),
 		@codigo_pr varchar (30),
 		@cantidad int,
 		@costo float,
 		@valor_total float
 AS
 begin
-		update Compra_Producto set cantidad=@cantidad, costo=@costo, valor_total=@valor_total where num_compra=@num_compra and codigo_pr=@codigo_pr;
+		update Compra_Producto set cantidad=@cantidad, costo=@costo, valor_total=@valor_total where fk_num_compra=@fk_num_compra and fk_codigo_pr=@codigo_pr;
 end
 go
 
-USP_update_compraProducto '12345', '123456', 30, 7500.00, 225000.00;
+--USP_update_compraProducto '12345', '123456', 30, 7500.00, 225000.00;
 
 go
 CREATE PROCEDURE USP_delete_compraProducto
-		@num_compra varchar (30),
-		@codigo_pr varchar (30),
-		@cantidad int,
-		@costo float,
-		@valor_total float
+		@fk_num_compra varchar (10),
+		@codigo_pr varchar (30)
 as
 begin
-		delete from Compra_Producto where num_compra=@num_compra and codigo_pr=@codigo_pr;
+		delete from Compra_Producto where fk_num_compra=@fk_num_compra and fk_codigo_pr=@codigo_pr;
 end
 go
 
-USP_delete_compraProducto '12345', '123456';
+--USP_delete_compraProducto '12345', '123456';

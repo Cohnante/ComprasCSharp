@@ -14,13 +14,15 @@ create table Empleado (id_empleado varchar (10) primary key,
 						telefono_empleado varchar (30) not null,
 						edad_empleado varchar (14) not null,
 						direccion_empleado varchar (150) not null,
-						nacionalidad_empleado varchar (40) not null
+						nacionalidad_empleado varchar (40) not null,
+						estado bit default 1
 						);
 go
 create table Proveedor (id_proveedor varchar (10) primary key ,
 						nombre_provedor varchar (30) not null,
 						telefono varchar (30) not null,
-						dirreccion_proveedor varchar (150) not null
+						dirreccion_proveedor varchar (150) not null,
+						estado bit default 1
 						);
 go
 create table Categoria (id_categoria varchar (10) primary key ,
@@ -34,10 +36,11 @@ create table Cliente (id_cliente varchar (10) primary key,
 					  telefono_cliente varchar (30) not null,
 					  edad_cliente varchar (14) not null,
 					  direccion_cliente varchar (150) not null,
-					  nacionalidad_cliente varchar (40) not null
+					  nacionalidad_cliente varchar (40) not null,
+					  estado bit default 1
 					  );
 go
-create table Ventas (numero_venta int primary key,
+create table Ventas (numero_venta int identity primary key,
 					fecha date not null,
 					fk_empleado varchar (10) not null,
 					fk_cliente varchar (10) not null,

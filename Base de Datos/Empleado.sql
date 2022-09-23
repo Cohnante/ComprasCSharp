@@ -1,4 +1,5 @@
 
+
 use distribuidora;
 
 /*Creacion de procedimientos*/
@@ -115,7 +116,7 @@ Create procedure USP_Actualizar_Ventas
 	@Total float
 as
 begin
-	update ventas set fecha=@fecha,fk_empleado=@FkEmpleado,fk_cliente=@FkCliente,iva=@Iva,sub_total=@subTotal,total=@Total where numero_venta=@Numero
+	update Ventas set fecha=@fecha,fk_empleado=@FkEmpleado,fk_cliente=@FkCliente,iva=@Iva,sub_total=@subTotal,total=@Total where numero_venta=@Numero
 end
 go
 
@@ -146,7 +147,7 @@ create procedure USP_Listar_Ventas
 	@Numero	varchar(10)
 as
 begin
-	select * from  ventas
+	select * from  Ventas
 end
 go
 
@@ -160,7 +161,7 @@ create procedure USP_agregar_ProductosVentas
 	@ValorTotal float
 as
 begin
-	insert into ventas_producto values (@Numero,@Num_venta,@cantidad,@ValorTotal)
+	insert into Ventas_producto values (@Numero,@Num_venta,@cantidad,@ValorTotal)
 end
 go
 
@@ -173,7 +174,7 @@ create procedure USP_Actualizar_ProductosVentas
 	@ValorTotal float
 as
 begin
-	update ventas_productos set cantida=@cantidad,valor_total=@ValorTotal where codigo_pr=@Numero and Num_venta=@Num_venta
+	update Ventas_producto set cantidad=@cantidad,valor_total=@ValorTotal where fk_codigo_pr=@Numero and fk_num_venta=@Num_venta
 end
 go
 
@@ -184,18 +185,18 @@ create procedure USP_Borrar_ProductosVentas
 	@Num_Pro varchar(30)
 as
 begin
-	delete from ProductosVentas where Num_venta=@Numero and codigo_pr=@Num_Pro
+	delete from Ventas_producto where fk_num_venta=@Numero and fk_codigo_pr=@Num_Pro
 end
 go
 
 /*Procedimientos Consultar ProductosVentas*/
 go
 create procedure USP_Consultar_ProductosVentas
-	@Numero	varchar(10)
+	@Numero	varchar(10),
 	@Numero_pro varchar(30)
 as
 begin
-	select * from  ProductosVentas where Num_venta=@Numero and codigo_pr=@Numero_pro
+	select * from  Ventas_producto where fk_num_venta=@Numero and fk_codigo_pr=@Numero_pro
 end
 go
 
@@ -204,6 +205,6 @@ go
 create procedure USP_Listar_ProductosVentas
 as
 begin
-	select * from  ProductosVentas
+	select * from  Ventas_producto
 end
 go

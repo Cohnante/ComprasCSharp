@@ -40,7 +40,7 @@ create procedure USP_Borrar_Empleado
 	@id varchar(10)
 as
 begin
-	delete from Empleado where id_empleado=@id
+	update Empleado set estado = 0 where id_empleado =  @id
 end
 go
 /*Procedimiento Consultar Empleado*/
@@ -49,7 +49,7 @@ create procedure USP_Consultar_Empleado
 	@id	varchar(10)
 as
 begin
-	select * from Empleado where id_empleado=@id
+	select * from Empleado where id_empleado=@id and estado = 1
 end
 go
 
@@ -58,7 +58,7 @@ create procedure USP_Listar_Empleado
 	@id	varchar(10)
 as
 begin
-	select * from Empleado
+	select * from Empleado where estado = 1
 end
 go
 
@@ -68,19 +68,12 @@ as
 begin
         SELECT '0' as id, 'Seleccione el nombre del Empleado ' as Nombre
         union
-        SELECT id_empleado, Nombre_empleado FROM empleado
+        SELECT id_empleado, Nombre_empleado FROM empleado where estado = 1
 end
 go
 
 /*Faltante ComboBox(NO SE COMO SE HACE ESA MONDA)*/ /* ya sabe como se hace esa MONDA */
 
-select * from Empleado
-
-execute USP_ComboBox_Empleado
-execute USP_Consultar_Empleado '1'
-execute USP_Borrar_Empleado '1'
-execute USP_Actualizar_Empleado '1','dx','da','123456789','das'
-execute USP_agregar_empleado '1','xd','ad','123456789','15','asd','xd'
 
 
 /*Procedimientos Ventas*/
@@ -90,7 +83,6 @@ execute USP_agregar_empleado '1','xd','ad','123456789','15','asd','xd'
 /*Procedimientos Agregar Ventas*/
 go
 Create procedure USP_Agregar_Ventas
-	@Numero varchar(10),
 	@fecha date,
 	@FkEmpleado Varchar(10),
 	@FkCliente varchar (10),				
@@ -99,34 +91,7 @@ Create procedure USP_Agregar_Ventas
 	@Total float
 as
 begin
-	insert into ventas values (@Numero,@fecha,@FkEmpleado,@FkCliente,@Iva,@subTotal,@Total)
-end
-go
-
-
-/*Procedimientos Actualizar Ventas*/
-go
-Create procedure USP_Actualizar_Ventas
-	@Numero varchar(10),
-	@fecha date,
-	@FkEmpleado Varchar(10),
-	@FkCliente varchar (10),				
-	@Iva float,
-	@subTotal float,
-	@Total float
-as
-begin
-	update Ventas set fecha=@fecha,fk_empleado=@FkEmpleado,fk_cliente=@FkCliente,iva=@Iva,sub_total=@subTotal,total=@Total where numero_venta=@Numero
-end
-go
-
-/*Procedimiento Borrar Ventas*/
-go
-create procedure USP_Borrar_Ventas
-	@Numero varchar(10)
-as
-begin
-	delete from ventas where numero_venta=@Numero
+	insert into ventas values (@fecha,@FkEmpleado,@FkCliente,@Iva,@subTotal,@Total)
 end
 go
 
@@ -165,29 +130,7 @@ begin
 end
 go
 
-/*Procedimientos Actualizar ProductosVentas*/
-go
-create procedure USP_Actualizar_ProductosVentas
-	@Numero varchar(30),
-	@Num_venta varchar(10),
-	@cantidad int,
-	@ValorTotal float
-as
-begin
-	update Ventas_producto set cantidad=@cantidad,valor_total=@ValorTotal where fk_codigo_pr=@Numero and fk_num_venta=@Num_venta
-end
-go
 
-/*Procedimiento Borrar ProductosVentas*/
-go
-create procedure USP_Borrar_ProductosVentas
-	@Numero varchar(10),
-	@Num_Pro varchar(30)
-as
-begin
-	delete from Ventas_producto where fk_num_venta=@Numero and fk_codigo_pr=@Num_Pro
-end
-go
 
 /*Procedimientos Consultar ProductosVentas*/
 go

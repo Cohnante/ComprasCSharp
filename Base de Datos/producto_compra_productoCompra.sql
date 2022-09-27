@@ -1,3 +1,5 @@
+
+
 use distribuidora
 
 go
@@ -12,12 +14,11 @@ go
 
 go 
 create procedure USP_insert_categoria
-	@id varchar(10),
 	@nombre varchar(30),
 	@caracteristica varchar(30)
 as
 begin 
- insert into Categoria (id_categoria, nombre, caracteristica) values (@id, @nombre, @caracteristica);
+ insert into Categoria values (@nombre, @caracteristica);
 end
 go 
 
@@ -80,13 +81,13 @@ go
 
 go
 CREATE PROCEDURE USP_insert_producto
-		@codigo_producto varchar (10),
+		@id varchar(10),
 		@nombre_producto varchar (30),
 		@valor float,
 		@fk_categoria varchar(10)
 AS
 begin
-	INSERT into Producto (codigo_producto, nombre_producto, valor, fk_categoria) VALUES (@codigo_producto, @nombre_producto, @valor, @fk_categoria);
+	INSERT into Producto VALUES (@id, @nombre_producto, @valor, @fk_categoria);
 end
 go 
 
@@ -189,15 +190,3 @@ end
 go
 
 --USP_update_compraProducto '12345', '123456', 30, 7500.00, 225000.00;
-
-go
-CREATE PROCEDURE USP_delete_compraProducto
-		@fk_num_compra varchar (10),
-		@codigo_pr varchar (30)
-as
-begin
-		delete from Compra_Producto where fk_num_compra=@fk_num_compra and fk_codigo_pr=@codigo_pr;
-end
-go
-
---USP_delete_compraProducto '12345', '123456';

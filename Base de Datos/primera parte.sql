@@ -18,17 +18,18 @@ create table Empleado (id_empleado varchar (10) primary key,
 						estado bit default 1
 						);
 go
-create table Proveedor (id_proveedor varchar (10) primary key ,
+create table Proveedor (id_proveedor varchar(30) primary key ,
 						nombre_provedor varchar (30) not null,
 						telefono varchar (30) not null,
 						dirreccion_proveedor varchar (150) not null,
 						estado bit default 1
 						);
 go
-create table Categoria (id_categoria varchar (10) primary key ,
+create table Categoria (id_categoria varchar(10) primary key ,
 						nombre varchar (30) not null,
 						caracteristica varchar (30)not null
 						);
+
 go
 create table Cliente (id_cliente varchar (10) primary key,
 					  nombre_cliente varchar (30) not null,
@@ -40,7 +41,7 @@ create table Cliente (id_cliente varchar (10) primary key,
 					  estado bit default 1
 					  );
 go
-create table Ventas (numero_venta int identity primary key,
+create table Ventas (numero_venta int identity(100,1) primary key,
 					fecha date not null,
 					fk_empleado varchar (10) not null,
 					fk_cliente varchar (10) not null,
@@ -54,7 +55,7 @@ go
 create table Compra (id_compra varchar (10) primary key,
 					fk_empleado varchar (10) not null,
 					iva float not null,
-					fk_proveedor varchar (10) not null,
+					fk_proveedor varchar(30) not null,
 					total float not null,
 					sub_total float not null,
 					fecha date not null,
@@ -65,7 +66,7 @@ go
 create table Producto (codigo_producto varchar (10) primary key,
 						nombre_producto varchar (30) not null,
 						valor float not null,
-						fk_categoria varchar (10) not null,
+						fk_categoria varchar(10) not null,
 						foreign key (fk_categoria) references Categoria(id_categoria)
 						);
 go
@@ -73,8 +74,8 @@ go
 
 
 create table Compra_Producto ( 
-							   fk_num_compra varchar (10) not null,
-							   fk_codigo_pr varchar (10) not null,
+							   fk_num_compra varchar(10) not null,
+							   fk_codigo_pr varchar(10) not null,
 							   cantidad int not null,
 							   costo float not null,
 							   valor_total float null,
@@ -83,7 +84,7 @@ create table Compra_Producto (
 							   primary key (fk_num_compra,fk_codigo_pr) 
 							  );
 go
-create table Ventas_producto (fk_codigo_pr varchar (10) not null,
+create table Ventas_producto (fk_codigo_pr varchar(10) not null,
 							  fk_num_venta int not null,
 							  cantidad int not null,
 							  valor_total float not null,
@@ -92,5 +93,4 @@ create table Ventas_producto (fk_codigo_pr varchar (10) not null,
 							  primary key (fk_num_venta,fk_codigo_pr)
 							  );
 go
-
 

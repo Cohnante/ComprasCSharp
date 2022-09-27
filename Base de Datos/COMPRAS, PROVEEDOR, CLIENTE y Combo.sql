@@ -1,5 +1,6 @@
 use distribuidora
 
+
 /* CRUD + Listar de Cliente */
 
 go
@@ -8,7 +9,7 @@ as
 begin
 	SELECT '0' as id, 'Seleccione un Cliente' as cliente
 	union
-	SELECT id_cliente as id, nombre_cliente as cliente from Cliente
+	SELECT id_cliente as id, nombre_cliente as cliente from Cliente where estado = 1
 end
 go
 
@@ -34,7 +35,7 @@ create procedure USP_READ_CLIENTE
 	@id varchar(10)
 as
 begin
-	SELECT * FROM Cliente where id_cliente = @id
+	SELECT * FROM Cliente where id_cliente = @id and estado = 1;
 end
 go
 
@@ -62,7 +63,7 @@ create procedure USP_DELETE_CLIENTE
 	@id varchar(10)
 as
 begin
-	DELETE FROM Cliente where id_cliente = @id
+	update Cliente set estado = 0 where id_cliente = @id
 end
 go
 
@@ -73,7 +74,7 @@ go
 create procedure USP_LIST_CLIENTE
 as
 begin
-	SELECT * FROM CLIENTE
+	SELECT * FROM CLIENTE where estado = 1
 end
 go
 
@@ -90,19 +91,18 @@ as
 begin
 	SELECT '0' as id, 'Seleccione un proveedor' as proveedor
 	union
-	SELECT id_proveedor as id, nombre_provedor as proveedor from Proveedor
+	SELECT id_proveedor as id, nombre_provedor as proveedor from Proveedor where estado = 1
 end
 go
 
 go
 create procedure USP_CREATE_PROVEEDOR
-	@id_proveedor varchar (10),
 	@nombre_proveedor varchar (30),
 	@telefono_proveedor varchar (30),
 	@direccion_proveedor varchar (150)
 as
 begin
-	INSERT INTO Proveedor(id_proveedor, nombre_provedor, telefono, dirreccion_proveedor) values (@id_proveedor, @nombre_proveedor, @telefono_proveedor,  @direccion_proveedor);
+	INSERT INTO Proveedor values ( @nombre_proveedor, @telefono_proveedor,  @direccion_proveedor);
 end
 go
 
@@ -113,7 +113,7 @@ create procedure USP_READ_PROVEEDOR
 	@id varchar(10)
 as
 begin
-	SELECT * FROM Proveedor where id_proveedor = @id
+	SELECT * FROM Proveedor where id_proveedor = @id and estado = 1
 end
 go
 
@@ -138,7 +138,7 @@ create procedure USP_DELETE_PROVEEDOR
 	@id varchar(10)
 as
 begin
-	DELETE FROM Proveedor where id_proveedor = @id
+	Update Proveedor set estado = 0 where id_proveedor = @id
 end
 go
 
@@ -149,7 +149,7 @@ go
 create procedure USP_LIST_PROVEEDOR
 as
 begin
-	SELECT * FROM Proveedor
+	SELECT * FROM Proveedor where estado = 0
 end
 go
 
@@ -162,13 +162,12 @@ execute USP_LIST_PROVEEDOR /* Work */
 
 go
 create procedure USP_CREATE_COMPRAS
-	@id_proveedor varchar (10),
 	@nombre_proveedor varchar (30),
 	@telefono_proveedor varchar (30),
 	@direccion_proveedor varchar (150)
 as
 begin
-	INSERT INTO Proveedor(id_proveedor, nombre_provedor, telefono, dirreccion_proveedor) values (@id_proveedor, @nombre_proveedor, @telefono_proveedor,  @direccion_proveedor);
+	INSERT INTO Proveedor values (@nombre_proveedor, @telefono_proveedor,  @direccion_proveedor);
 end
 go
 
@@ -199,14 +198,6 @@ go
 
 execute USP_UPDATE_COMPRAS '1234567890', 'Proveedor 1', '5432154', 'Direccion Proveedor 2' /* Work */
 
-go 
-create procedure USP_DELETE_COMPRAS
-	@id varchar(10)
-as
-begin
-	DELETE FROM Proveedor where id_proveedor = @id
-end
-go
 
 execute USP_DELETE_COMPRAS '1234567890' /* Work */
 

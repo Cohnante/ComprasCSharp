@@ -32,13 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LibConexionBD">
-      <HintPath>..\..\..\..\Sesión 2\LIBRERIAS\LibConexionBD\LibConexionBD\bin\Release\LibConexionBD.dll</HintPath>
+      <HintPath>..\..\Librerias\LibConexionBD\LibConexionBD\bin\Release\LibConexionBD.dll</HintPath>
     </Reference>
     <Reference Include="LibLlenarCombos">
-      <HintPath>..\..\..\..\EMPLEADO\LibLlenarCombos\LibLlenarCombos\bin\Release\LibLlenarCombos.dll</HintPath>
+      <HintPath>..\..\Librerias\LibLlenarCombos\LibLlenarCombos\bin\Release\LibLlenarCombos.dll</HintPath>
     </Reference>
     <Reference Include="LibLlenarGrid">
-      <HintPath>..\..\..\..\Sesión 2\LIBRERIAS\LibLlenarGrid\LibLlenarGrid\bin\Debug\LibLlenarGrid.dll</HintPath>
+      <HintPath>..\..\Librerias\LibLlenarGrid\LibLlenarGrid\bin\Debug\LibLlenarGrid.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

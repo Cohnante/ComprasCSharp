@@ -28,7 +28,7 @@ begin
 end
 go
 
-execute USP_CREATE_CLIENTE '1234567890', 'Moises', 'Pineda', '3053326008', '17', 'Direccion', 'Colombia' /* Work */
+execute USP_CREATE_CLIENTE '1234567891', 'Diana', 'Moya', '3053326008', '18', 'Direccion', 'Colombia' /* Work */
 
 go
 create procedure USP_READ_CLIENTE

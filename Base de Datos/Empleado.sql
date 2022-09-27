@@ -17,9 +17,13 @@ create procedure USP_agregar_empleado
 	@nacionalidad varchar(40)
 as
 begin 
-	insert into Empleado values (@id,@nombre,@apellido,@telefono,@edad,@direccion,@nacionalidad)
+	insert into Empleado(id_empleado, nombre_empleado, apellido_empleado, telefono_empleado, edad_empleado, direccion_empleado, nacionalidad_empleado) 
+	values (@id,@nombre,@apellido,@telefono,@edad,@direccion,@nacionalidad)
 end 
 go
+
+USP_agregar_empleado '12346', 'Julio', 'Apellido', '5321', '14', 'direccion', 'colombiano'
+
 /*Procedimiento Actualizar Empleado*/
 go
 create procedure USP_Actualizar_Empleado
@@ -91,10 +95,12 @@ Create procedure USP_Agregar_Ventas
 	@Total float
 as
 begin
-	insert into ventas values (@fecha,@FkEmpleado,@FkCliente,@Iva,@subTotal,@Total)
+	insert into ventas values (@fecha,@FkEmpleado,@FkCliente,@Iva,@subTotal,@Total)	
+	select MAX(numero_venta) as id from ventas where fk_empleado = @FkEmpleado and fk_cliente = @FkCLiente
 end
 go
 
+USP_Agregar_Ventas '2000-02-15', '12346', '1234567891', 1500.2,2000.5, 2500.7
 
 /*Procedimientos Consultar Ventas*/
 go
@@ -109,13 +115,13 @@ go
 /*Procedimientos Listar Ventas*/
 go
 create procedure USP_Listar_Ventas
-	@Numero	varchar(10)
 as
 begin
-	select * from  Ventas
+	select numero_venta as 'Numero de Venta', fecha as 'Fecha', nombre_empleado, nombre_cliente, iva as 'IVA', sub_total as 'Sub Total' , total as 'Total' from  Ventas, Empleado, Cliente  where fk_empleado = id_empleado and fk_cliente = id_cliente
 end
 go
 
+USP_Listar_Ventas
 
 /*Procedimientos Agregar ProductosVentas*/
 go
@@ -126,7 +132,7 @@ create procedure USP_agregar_ProductosVentas
 	@ValorTotal float
 as
 begin
-	insert into Ventas_producto values (@Numero,@Num_venta,@cantidad,@ValorTotal)
+	insert into Ventas_producto values (@Numero,@Num_venta,@cantidad,@ValorTotal)	
 end
 go
 

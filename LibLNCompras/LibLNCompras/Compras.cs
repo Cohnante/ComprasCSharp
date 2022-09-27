@@ -21,6 +21,7 @@ namespace LibLNCompras
         private float valor;
         private string categoria;
         private string error;
+        private SqlDataReader reader;
         #endregion
 
         #region Propiedades
@@ -29,6 +30,7 @@ namespace LibLNCompras
         public float Valor { get => valor; set => valor = value; }
         public string Categoria { get => categoria; set => categoria = value; }
         public string Error { get => error; set => error = value; }
+        public SqlDataReader Reader { get => reader; set => reader = value; }
         #endregion
 
         #region Metodos Publicos
@@ -57,6 +59,7 @@ namespace LibLNCompras
                 objConexion = null;
                 return false;
             }
+            reader = objConexion.Reader;
             objConexion = null;
             return true;
         }
@@ -97,6 +100,84 @@ namespace LibLNCompras
     public class Ventas
     {
         #region Atributos
-        private string numero_compra;
+        private int numero_compra;
+        private string fecha;
+        private string fk_empleado;
+        private string fk_cliente;
+        private float iva;
+        private float sub_total;
+        private float total;
+        private string error;
+        private SqlDataReader reader;
+        #endregion
+
+        #region Propiedades
+        public int Numero_compra { get => numero_compra; set => numero_compra = value; }
+        public string Fecha { get => fecha; set => fecha = value; }
+        public string Fk_empleado { get => fk_empleado; set => fk_empleado = value; }
+        public string Fk_cliente { get => fk_cliente; set => fk_cliente = value; }
+        public float Iva { get => iva; set => iva = value; }
+        public float Sub_total { get => sub_total; set => sub_total = value; }
+        public float Total { get => total; set => total = value; }
+        public SqlDataReader Reader { get => reader; set => reader = value; }
+        public string Error { get => error; set => error = value; }
+        #endregion
+
+        #region Metodos Public
+        public bool CrearVenta()
+        {
+            ClsConexion objConexion = new ClsConexion();
+            string sentencia = "execute USP_Agregar_Ventas '" + fecha + "' , '" + fk_empleado + "' , '" + fk_cliente + "' , " + iva + " , " + sub_total + " , " + total ;
+            if(!objConexion.EjecutarSentencia(sentencia, false))
+            {
+                error = objConexion.Error;
+                objConexion = null;
+                return false;
+            }
+            reader = objConexion.Reader;
+            if (reader.HasRows)
+            {
+                reader.Read();
+                numero_compra = reader.GetInt32(0);
+                reader.Close();
+                objConexion = null;
+                return true;
+            }
+            objConexion = null;
+            return false;
+        }
+
+        public bool ConsultarVenta()
+        {
+            ClsConexion objConexion = new ClsConexion();
+            string sentencia = "execute USP_Cosultar_Ventas " + numero_compra;
+            if(!objConexion.Consultar(sentencia, false))
+            {
+                error = objConexion.Error;
+                objConexion = null;
+                return false;
+            }
+            reader = objConexion.Reader;
+            objConexion = null;
+            return true;
+        }
+        
+        public bool ListarVenta(DataGridView objGrid)
+        {
+            ClsLlenarGrid objLlenarGrid = new ClsLlenarGrid();
+            objLlenarGrid.SQL = "execute USP_Listar_Ventas";
+            objLlenarGrid.NombreTabla = "Ventas";
+            if (!objLlenarGrid.LlenarGrid(objGrid))
+            {
+                error = objLlenarGrid.Error;
+                objLlenarGrid = null;
+                return false;
+            }
+            objLlenarGrid = null;
+            return true;
+        }
+        #endregion
+
+
     }
 }

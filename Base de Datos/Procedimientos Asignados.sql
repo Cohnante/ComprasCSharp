@@ -39,10 +39,10 @@ go
 --USP_select_producto_uno '123';
 
 go 
-CREATE PROCEDURE USP_select_productos_all
+CREATE PROCEDURE USP_select_productos_list
 as
 begin
-	select * from Producto;
+	select codigo_producto as 'Id del Producto', nombre_producto as 'Nombre del Producto', valor as 'Precio',nombre as 'Categoria'   from Producto, Categoria where codigo_producto = id_categoria;
 end
 go 
 
@@ -62,15 +62,6 @@ go
 
 --USP_update_producto '123', 'carne roja', 9500.300, '123456';
 
-go
-CREATE PROCEDURE USP_delete_producto
-		@codigo_producto varchar (10)
-as
-begin
-		delete from Producto where codigo_producto=@codigo_producto;
-end
-go
-
 /* Ventas */
 /*Procedimientos Ventas*/
 
@@ -87,9 +78,11 @@ Create procedure USP_Agregar_Ventas
 	@Total float
 as
 begin
-	insert into ventas values (@fecha,@FkEmpleado,@FkCliente,@Iva,@subTotal,@Total)
+	insert into ventas values (@fecha,@FkEmpleado,@FkCliente,@Iva,@subTotal,@Total)	
+	select MAX(numero_venta) as id from ventas where fk_empleado = @FkEmpleado and fk_cliente = @FkCLiente
 end
 go
+
 
 
 /*Procedimientos Consultar Ventas*/
@@ -105,12 +98,11 @@ go
 /*Procedimientos Listar Ventas*/
 go
 create procedure USP_Listar_Ventas
-	@Numero	varchar(10)
 as
 begin
-	select * from  Ventas
+	select numero_venta as 'Numero de Venta', fecha as 'Fecha', nombre_empleado, nombre_cliente, iva as 'IVA', sub_total as 'Sub Total' , total as 'Total' from  Ventas, Empleado, Cliente  where fk_empleado = id_empleado and fk_cliente = id_cliente
 end
-go 
+go
 
 
 /* Detalles */

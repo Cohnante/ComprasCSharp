@@ -123,7 +123,7 @@ namespace LibLNCompras
         public string Error { get => error; set => error = value; }
         #endregion
 
-        #region Metodos Public
+        #region Metodos Publicos
         public bool CrearVenta()
         {
             ClsConexion objConexion = new ClsConexion();
@@ -176,8 +176,16 @@ namespace LibLNCompras
             objLlenarGrid = null;
             return true;
         }
+
+        public bool AñadirProductosVenta(List<String> Productos)
+        {
+            ClsConexion objConexion = new ClsConexion();
+            string sentencia;
+            for(int i = 0; i < Productos.Count; i++)
+            {
+                sentencia = "USP_agregar_ProductosVentas "
+            }
+        }
         #endregion
-
-
     }
 }

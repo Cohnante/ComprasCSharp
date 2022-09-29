@@ -124,11 +124,10 @@ go
 /*Procedimientos Consultar ProductosVentas*/
 go
 create procedure USP_Consultar_ProductosVentas
-	@Numero	varchar(10),
-	@Numero_pro varchar(30)
+	@Numero	varchar(10)
 as
 begin
-	select * from  Ventas_producto where fk_num_venta=@Numero and fk_codigo_pr=@Numero_pro
+	select * from  Ventas_producto where fk_num_venta=@Numero
 end
 go
 
@@ -137,7 +136,7 @@ go
 create procedure USP_Listar_ProductosVentas
 as
 begin
-	select * from  Ventas_producto
+	select fk_codigo_pr as 'Producto', fk_codigo_pr as 'Numero de la Venta', cantidad as 'Cantidad del producto en la venta', valor_total as 'Valor total del Producto en la Venta' from  Ventas_producto
 end
 go
 

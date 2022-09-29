@@ -84,8 +84,24 @@ namespace LibLNCompras
             ClsLlenarCombos objLlenarCombo = new ClsLlenarCombos();
             objLlenarCombo.SQL = "execute USP_combo_producto";
             objLlenarCombo.NombreTabla = "Producto";
-            objLlenarCombo.ColumnaValor = "Codigo delproducto";
-            objLlenarCombo.ColumnaTexto = "Nombre del producto";
+            objLlenarCombo.ColumnaValor = "id";
+            objLlenarCombo.ColumnaTexto = "producto";
+            if (!objLlenarCombo.LlenarCombo(comboBox))
+            {
+                Error = objLlenarCombo.Error;
+                objLlenarCombo = null;
+                return false;
+            }
+            objLlenarCombo = null;
+            return true;
+        }
+        public bool ComboCategoriaProductos(ComboBox comboBox)
+        {
+            ClsLlenarCombos objLlenarCombo = new ClsLlenarCombos();
+            objLlenarCombo.SQL = "execute USP_combo_categoria";
+            objLlenarCombo.NombreTabla = "Categoria";
+            objLlenarCombo.ColumnaValor = "id";
+            objLlenarCombo.ColumnaTexto = "categoria";
             if (!objLlenarCombo.LlenarCombo(comboBox))
             {
                 Error = objLlenarCombo.Error;
@@ -151,7 +167,7 @@ namespace LibLNCompras
         {
             ClsConexion objConexion = new ClsConexion();
             string sentencia = "execute USP_Cosultar_Ventas " + numero_compra;
-            if(!objConexion.Consultar(sentencia, false))
+            if(!objConexion.ConsultarValorUnico(sentencia, false))
             {
                 error = objConexion.Error;
                 objConexion = null;
@@ -177,14 +193,52 @@ namespace LibLNCompras
             return true;
         }
 
-        public bool AñadirProductosVenta(List<String> Productos)
+        public bool AñadirProductosVenta(Array Productos, String Venta)
         {
             ClsConexion objConexion = new ClsConexion();
             string sentencia;
-            for(int i = 0; i < Productos.Count; i++)
+            for(int i = 0; i < Productos.Length; i++)
             {
-                sentencia = "USP_agregar_ProductosVentas "
+                sentencia = "USP_agregar_ProductosVentas '" + Productos.GetValue(i, 0) + "' , '" + Venta + " , " + Productos.GetValue(i, 1) + " , " + Productos.GetValue(i, 2);
+                if(!objConexion.EjecutarSentencia(sentencia, false))
+                {
+                    error = objConexion.Error;
+                    objConexion = null;
+                    return false;
+                }
             }
+            objConexion = null;
+            return true;
+        }
+
+        public bool ConsultarProductosVenta(String Venta)
+        {
+            ClsConexion objConexion = new ClsConexion();
+            string sentencia = "USP_Consultar_ProductosVentas '" + Venta + "'";
+            if(!objConexion.ConsultarValorUnico(sentencia, false))
+            {
+                error = objConexion.Error;
+                objConexion = null;
+                return false;
+            }
+            reader = objConexion.Reader;
+            objConexion = null;
+            return true;
+        }
+
+        public bool ListarVentaProducto(DataGridView objGrid)
+        {
+            ClsLlenarGrid objLlenarGrid = new ClsLlenarGrid();
+            objLlenarGrid.SQL = "execute USP_Listar_ProductosVentas";
+            objLlenarGrid.NombreTabla = "Detalles Venta";
+            if (!objLlenarGrid.LlenarGrid(objGrid))
+            {
+                error = objLlenarGrid.Error;
+                objLlenarGrid = null;
+                return false;
+            }
+            objLlenarGrid = null;
+            return true;
         }
         #endregion
     }

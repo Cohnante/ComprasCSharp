@@ -1,0 +1,11 @@
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\bin\Debug\AppVentas.exe.config
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\bin\Debug\AppVentas.exe
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\bin\Debug\AppVentas.pdb
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\obj\Debug\AppVentas.csproj.AssemblyReference.cache
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\obj\Debug\AppVentas.csproj.SuggestedBindingRedirects.cache
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\obj\Debug\AppVentas.Properties.Resources.resources
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\obj\Debug\AppVentas.csproj.GenerateResource.cache
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\obj\Debug\AppVentas.csproj.CoreCompileInputs.cache
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\obj\Debug\AppVentas.exe
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\obj\Debug\AppVentas.pdb
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\AppVentas\AppVentas\obj\Debug\AppVentas.VentasForm.resources

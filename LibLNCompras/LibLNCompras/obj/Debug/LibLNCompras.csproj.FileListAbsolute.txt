@@ -1,0 +1,15 @@
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibLNCompras.dll
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibLNCompras.pdb
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibConexionBD.dll
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibLlenarCombos.dll
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibLlenarGrid.dll
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibParametro.dll
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibConexionBD.pdb
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibLlenarCombos.pdb
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibLlenarGrid.pdb
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\bin\Debug\LibParametro.pdb
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\obj\Debug\LibLNCompras.csproj.AssemblyReference.cache
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\obj\Debug\LibLNCompras.csproj.CoreCompileInputs.cache
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\obj\Debug\LibLNCompras.csproj.CopyComplete
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\obj\Debug\LibLNCompras.dll
+C:\Users\moise\OneDrive\Documentos\SENA\CSharp 3\ComprasCSharp\LibLNCompras\LibLNCompras\obj\Debug\LibLNCompras.pdb

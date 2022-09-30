@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Conexion>
+  <Servidor>MOISESPH</Servidor>
+  <BaseDatos>distribuidora</BaseDatos>
+  <Usuario></Usuario>
+  <Password></Password>
+</Conexion>

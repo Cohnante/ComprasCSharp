@@ -209,13 +209,13 @@ namespace LibLNCompras
             return true;
         }
 
-        public bool AñadirProductosVenta(Array Productos, String Venta)
+        public bool AñadirProductosVenta(Array Productos)
         {
             ClsConexion objConexion = new ClsConexion();
             string sentencia;
             for(int i = 0; i < Productos.Length; i++)
             {
-                sentencia = "USP_agregar_ProductosVentas '" + Productos.GetValue(i, 0) + "' , '" + Venta + " , " + Productos.GetValue(i, 1) + " , " + Productos.GetValue(i, 2);
+                sentencia = "USP_agregar_ProductosVentas '" + Productos.GetValue(i, 0) + "' , '" + numero_compra + " , " + Productos.GetValue(i, 1) + " , " + Productos.GetValue(i, 2);
                 if(!objConexion.EjecutarSentencia(sentencia, false))
                 {
                     error = objConexion.Error;

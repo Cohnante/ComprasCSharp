@@ -43,13 +43,14 @@
             this.txtValorUnit = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtSubTotalProducto = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.btnAddProducto = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.txtProducto = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboCliente = new System.Windows.Forms.ComboBox();
+            this.checkIVA = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridProductosVenta)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -178,12 +179,12 @@
             this.label11.TabIndex = 20;
             this.label11.Text = "SubTotal";
             // 
-            // textBox3
+            // txtSubTotalProducto
             // 
-            this.textBox3.Location = new System.Drawing.Point(622, 310);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(129, 22);
-            this.textBox3.TabIndex = 19;
+            this.txtSubTotalProducto.Location = new System.Drawing.Point(622, 310);
+            this.txtSubTotalProducto.Name = "txtSubTotalProducto";
+            this.txtSubTotalProducto.Size = new System.Drawing.Size(129, 22);
+            this.txtSubTotalProducto.TabIndex = 19;
             // 
             // label12
             // 
@@ -223,6 +224,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkIVA);
             this.panel1.Controls.Add(this.txtProducto);
             this.panel1.Controls.Add(this.gridProductosVenta);
             this.panel1.Controls.Add(this.button2);
@@ -233,7 +235,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.txtSubTotalProducto);
             this.panel1.Controls.Add(this.comboCliente);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label3);
@@ -257,6 +259,16 @@
             this.comboCliente.Name = "comboCliente";
             this.comboCliente.Size = new System.Drawing.Size(160, 24);
             this.comboCliente.TabIndex = 4;
+            // 
+            // checkIVA
+            // 
+            this.checkIVA.AutoSize = true;
+            this.checkIVA.Location = new System.Drawing.Point(498, 98);
+            this.checkIVA.Name = "checkIVA";
+            this.checkIVA.Size = new System.Drawing.Size(79, 20);
+            this.checkIVA.TabIndex = 26;
+            this.checkIVA.Text = "IVA 19%";
+            this.checkIVA.UseVisualStyleBackColor = true;
             // 
             // FormVentas
             // 
@@ -292,12 +304,13 @@
         private System.Windows.Forms.TextBox txtValorUnit;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtSubTotalProducto;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnAddProducto;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtProducto;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboCliente;
+        private System.Windows.Forms.CheckBox checkIVA;
     }
 }

@@ -38,7 +38,22 @@ namespace LibLNCompras
         public bool CrearProducto()
         {
             ClsConexion objConexion = new ClsConexion();
-            string sentencia = "execute USP_insert_producto '" + codigo_producto + "', '" +nombre_producto+"', '"+valor+"', '"+categoria+"';";
+            string sentencia = "execute USP_insert_producto '" + codigo_producto + "', '" +nombre_producto+"', "+valor+", '"+categoria+"';";
+            if (!objConexion.EjecutarSentencia(sentencia, false))
+            {
+                Error = objConexion.Error;
+                objConexion = null;
+                return false;
+            }
+            objConexion = null;
+            return true;
+
+        }
+
+        public bool ActualizarProducto()
+        {
+            ClsConexion objConexion = new ClsConexion();
+            string sentencia = "execute USP_update_producto '" + codigo_producto + "', '" + nombre_producto + "', " + valor + ", '" + categoria + "';";
             if (!objConexion.EjecutarSentencia(sentencia, false))
             {
                 Error = objConexion.Error;
@@ -68,7 +83,7 @@ namespace LibLNCompras
         {
             ClsLlenarGrid objGridView = new ClsLlenarGrid();
             objGridView.NombreTabla = "Datos de los productos";
-            objGridView.SQL = "execute USP_select_productos_all";
+            objGridView.SQL = "execute USP_select_productos_list";
             if (!objGridView.LlenarGrid(objGrid))
             {
                 Error = objGridView.Error;
@@ -111,6 +126,7 @@ namespace LibLNCompras
             objLlenarCombo = null;
             return true;
         }
+
         #endregion
     }
     public class Ventas
@@ -240,6 +256,24 @@ namespace LibLNCompras
             objLlenarGrid = null;
             return true;
         }
+
+        public bool ComboCliente(ComboBox comboBox)
+        {
+            ClsLlenarCombos objCombo = new ClsLlenarCombos();
+            objCombo.SQL = "execute USP_combo_Cliente";
+            objCombo.NombreTabla = "Clientes";
+            objCombo.ColumnaTexto = "cliente";
+            objCombo.ColumnaValor = "id";
+            if (!objCombo.LlenarCombo(comboBox))
+            {
+                error = objCombo.Error;
+                objCombo = null;
+                return false;
+            }
+            objCombo = null;
+            return true;
+        }
+
         #endregion
     }
 }

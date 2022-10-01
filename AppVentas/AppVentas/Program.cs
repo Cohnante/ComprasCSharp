@@ -16,7 +16,7 @@ namespace AppVentas
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new VentasForm());
+            Application.Run(new MainForm());
         }
     }
 }

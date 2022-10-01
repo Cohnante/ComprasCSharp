@@ -14,15 +14,19 @@ go
 
 go 
 create procedure USP_insert_categoria
+	@id varchar(10),
 	@nombre varchar(30),
 	@caracteristica varchar(30)
 as
 begin 
- insert into Categoria values (@nombre, @caracteristica);
+ insert into Categoria values (@id, @nombre, @caracteristica);
 end
 go 
 
---USP_insert_categoria '123456', 'comida', 'roja';
+execute USP_insert_categoria '10101', 'Camisas', 'superior';
+execute USP_insert_categoria '10102', 'Zapatos', 'zapatos';
+execute USP_insert_categoria '10103', 'Lenceria', 'interior';
+execute USP_insert_categoria '10104', 'Pantalones', 'inferior';
 
 go 
 create procedure USP_select_categoria_uno
@@ -116,7 +120,7 @@ go
 
 go
 CREATE PROCEDURE USP_update_producto
-@codigo_producto varchar (10),
+		@codigo_producto varchar (10),
 		@nombre_producto varchar (30),
 		@valor float,
 		@fk_categoria varchar(10)

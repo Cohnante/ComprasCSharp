@@ -160,7 +160,7 @@ namespace LibLNCompras
         {
             ClsConexion objConexion = new ClsConexion();
             string sentencia = "execute USP_Agregar_Ventas '" + fecha + "' , '" + fk_empleado + "' , '" + fk_cliente + "' , " + iva + " , " + sub_total + " , " + total ;
-            if(!objConexion.EjecutarSentencia(sentencia, false))
+            if(!objConexion.Consultar(sentencia, false))
             {
                 error = objConexion.Error;
                 objConexion = null;

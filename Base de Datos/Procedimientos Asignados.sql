@@ -14,6 +14,18 @@ end
 go
 
 go
+CREATE PROCEDURE USP_update_producto
+		@codigo_producto varchar (10),
+		@nombre_producto varchar (30),
+		@valor float,
+		@fk_categoria varchar(10)
+as
+begin
+		update Producto set nombre_producto=@nombre_producto, valor=@valor, fk_categoria=@fk_categoria where codigo_producto=@codigo_producto;
+end
+go
+
+go
 CREATE PROCEDURE USP_insert_producto
 		@id varchar(10),
 		@nombre_producto varchar (30),
@@ -25,6 +37,20 @@ begin
 end
 go 
 
+go
+CREATE PROCEDURE USP_combo_Cliente
+AS
+begin
+	SELECT '0' as id, 'Seleccione un Cliente' as cliente
+	union
+	SELECT id_cliente as id, nombre_cliente + ' ' + apellido_cliente as cliente from Cliente
+end
+go
+
+USP_combo_Cliente
+
+execute USP_insert_producto '125', 'Camisa Adidas', 30000.0, '10101';
+
 --USP_insert_producto '123', 'arroz blanco', 3000.500, '123456';
 
 go
@@ -32,21 +58,21 @@ CREATE PROCEDURE USP_select_producto_uno
 		@codigo_producto varchar (10)
 as
 begin
-	select * from Producto where codigo_producto=@codigo_producto;
+	select codigo_producto, nombre_producto, valor, fk_categoria from Producto where codigo_producto=@codigo_producto;
 end
 go
 
---USP_select_producto_uno '123';
+USP_select_producto_uno '123';
 
 go 
 CREATE PROCEDURE USP_select_productos_list
 as
 begin
-	select codigo_producto as 'Id del Producto', nombre_producto as 'Nombre del Producto', valor as 'Precio',nombre as 'Categoria'   from Producto, Categoria where codigo_producto = id_categoria;
+	select codigo_producto as 'Id del Producto', nombre_producto as 'Nombre del Producto', valor as 'Precio',nombre as 'Categoria'   from Producto inner join Categoria on Categoria.id_categoria = Producto.fk_categoria;
 end
 go 
 
---USP_select_productos_all;
+USP_select_productos_list;
 
 go
 CREATE PROCEDURE USP_update_producto
@@ -124,11 +150,10 @@ go
 /*Procedimientos Consultar ProductosVentas*/
 go
 create procedure USP_Consultar_ProductosVentas
-	@Numero	varchar(10),
-	@Numero_pro varchar(30)
+	@Numero	varchar(10)
 as
 begin
-	select * from  Ventas_producto where fk_num_venta=@Numero and fk_codigo_pr=@Numero_pro
+	select * from  Ventas_producto where fk_num_venta=@Numero
 end
 go
 
@@ -137,7 +162,7 @@ go
 create procedure USP_Listar_ProductosVentas
 as
 begin
-	select * from  Ventas_producto
+	select fk_codigo_pr as 'Producto', fk_codigo_pr as 'Numero de la Venta', cantidad as 'Cantidad del producto en la venta', valor_total as 'Valor total del Producto en la Venta' from  Ventas_producto
 end
 go
 

@@ -17,6 +17,10 @@ create table Empleado (id_empleado varchar (10) primary key,
 						nacionalidad_empleado varchar (40) not null,
 						estado bit default 1
 						);
+
+						INSERT EMPLEADO(id_empleado, nombre_empleado, apellido_empleado, telefono_empleado, edad_empleado, direccion_empleado, nacionalidad_empleado) VALUES 
+						('1023523155', 'Moises', 'Pineda', '3053326008', '18', 'Armenia, Quindio', 'Colombia')
+
 go
 create table Proveedor (id_proveedor varchar(30) primary key ,
 						nombre_provedor varchar (30) not null,
@@ -40,6 +44,13 @@ create table Cliente (id_cliente varchar (10) primary key,
 					  nacionalidad_cliente varchar (40) not null,
 					  estado bit default 1
 					  );
+
+					  INSERT Cliente(id_cliente, nombre_cliente, apellido_cliente, telefono_cliente, edad_cliente, direccion_cliente, nacionalidad_cliente) VALUES
+					  ('123456789', 'Juan Carlos', 'Perez', '3051112203', '20', 'Armenia, Quindio', 'Colombia'),
+					  ('123456781', 'Sara', 'Campos', '3051112213', '17', 'Armenia, Quindio', 'Colombia'),
+					  ('123456782', 'Nicole', 'Bolaño', '3021112213', '19', 'Armenia, Quindio', 'Colombia')
+
+
 go
 create table Ventas (numero_venta int identity(100,1) primary key,
 					fecha date not null,
